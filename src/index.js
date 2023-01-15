@@ -1,4 +1,4 @@
-function toReadable(num) {
+module.exports = function toReadable(number) {
     let lookup = {
         0: "zero",
         1: "one",
@@ -30,46 +30,43 @@ function toReadable(num) {
         90: "ninety",
     };
     let str = "";
-    let numString = num.toString();
+    let numString = number.toString();
     let numLength = numString.length;
-    if (numLength > 9) {
-        str = "Number is too large to convert";
-        return str;
-    }
-    if (num === 0) {
+
+    if (number === 0) {
         str = lookup[0];
         return str;
     }
-    if (num < 0) {
+    if (number < 0) {
         str = "minus ";
-        num = -num;
+        number = -number;
     }
-    if (num < 21) {
-        str += lookup[num];
-    } else if (num < 100) {
-        let tens = Math.floor(num / 10);
+    if (number < 21) {
+        str += lookup[number];
+    } else if (number < 100) {
+        let tens = Math.floor(number / 10);
         str += lookup[tens * 10];
-        if (num % 10 !== 0) {
-            str += " " + lookup[num % 10];
+        if (number % 10 !== 0) {
+            str += " " + lookup[number % 10];
         }
-    } else if (num < 1000) {
-        let hundreds = Math.floor(num / 100);
+    } else if (number < 1000) {
+        let hundreds = Math.floor(number / 100);
         str += lookup[hundreds] + " hundred";
-        if (num % 100 !== 0) {
-            str += " " + toReadable(num % 100);
+        if (number % 100 !== 0) {
+            str += " " + toReadable(number % 100);
         }
-    } else if (num < 1000000) {
-        let thousands = Math.floor(num / 1000);
+    } else if (number < 1000000) {
+        let thousands = Math.floor(number / 1000);
         str += toReadable(thousands) + " thousand";
-        if (num % 1000 !== 0) {
-            str += " " + toReadable(num % 1000);
+        if (number % 1000 !== 0) {
+            str += " " + toReadable(number % 1000);
         }
-    } else if (num < 1000000000) {
-        let millions = Math.floor(num / 1000000);
+    } else if (number < 1000000000) {
+        let millions = Math.floor(number / 1000000);
         str += toReadable(millions) + " million";
-        if (num % 1000000 !== 0) {
-            str += " " + toReadable(num % 1000000);
+        if (number % 1000000 !== 0) {
+            str += " " + toReadable(number % 1000000);
         }
     }
     return str;
-}
+};
